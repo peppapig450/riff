@@ -95,7 +95,6 @@ template $PlaybackWidget : Box {
       }
 
       Stack volume-stack {
-        visible-child-name: "slider";
         hexpand: true;
 
         layout {
@@ -160,6 +159,7 @@ template $PlaybackWidget : Box {
             }
           };
         }
+        visible-child-name: "slider";
       }
     };
   }
