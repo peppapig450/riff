@@ -128,7 +128,7 @@ impl SpotOauthClient {
                 RequestTokenError::ServerResponse(res) => {
                     error!(
                         "An error occured while exchange a code: {}",
-                        res.to_string()
+                        res
                     );
                     OAuthError::ExchangeCode { e: res.to_string() }
                 }
@@ -177,7 +177,7 @@ impl SpotOauthClient {
                 if let RequestTokenError::ServerResponse(res) = e {
                     error!(
                         "An error occured while refreshing the token: {}",
-                        res.to_string()
+                        res
                     );
                 }
             })

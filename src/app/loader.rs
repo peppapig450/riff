@@ -4,7 +4,7 @@ use isahc::config::Configurable;
 use isahc::{AsyncBody, AsyncReadResponseExt, HttpClient, Response};
 use std::collections::hash_map::DefaultHasher;
 use std::hash::Hasher;
-use std::io::{Error, ErrorKind, Write};
+use std::io::{Error, Write};
 
 // A wrapper to be able to implement the Write trait on a PixbufLoader
 struct LocalPixbufLoader<'a>(&'a PixbufLoader);
@@ -13,14 +13,14 @@ impl Write for LocalPixbufLoader<'_> {
     fn write(&mut self, buf: &[u8]) -> Result<usize, Error> {
         self.0
             .write(buf)
-            .map_err(|e| Error::new(ErrorKind::Other, format!("glib error: {e}")))?;
+            .map_err(|e| Error::other(format!("glib error: {e}")))?;
         Ok(buf.len())
     }
 
     fn flush(&mut self) -> Result<(), Error> {
         self.0
             .close()
-            .map_err(|e| Error::new(ErrorKind::Other, format!("glib error: {e}")))?;
+            .map_err(|e| Error::other(format!("glib error: {e}")))?;
         Ok(())
     }
 }

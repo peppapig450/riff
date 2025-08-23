@@ -52,6 +52,12 @@ glib::wrapper! {
     ReleaseDetailsDialog(ObjectSubclass<imp::ReleaseDetailsDialog>) @extends gtk::Widget, libadwaita::Dialog;
 }
 
+impl Default for ReleaseDetailsDialog {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ReleaseDetailsDialog {
     pub fn new() -> Self {
         glib::Object::new()

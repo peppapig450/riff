@@ -108,7 +108,7 @@ impl PlaybackWidget {
             widget.track_position.set_text("0∶00");
             widget
                 .track_duration
-                .set_text(&format!("{}", format_duration(duration)));
+                .set_text(&format_duration(duration).to_string());
             widget.track_position.set_visible(true);
             widget.track_duration.set_visible(true);
         } else {

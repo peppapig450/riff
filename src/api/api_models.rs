@@ -197,7 +197,7 @@ pub struct PlaylistOwner {
     pub display_name: String,
 }
 
-const EMPTY_IMAGE: &'static [Image] = &[Image {
+const EMPTY_IMAGE: &[Image] = &[Image {
     url: String::new(),
     height: Some(640),
     width: Some(640),
@@ -207,7 +207,7 @@ impl WithImages for Playlist {
     fn images(&self) -> &[Image] {
         match &self.images {
             Some(x) => &x[..],
-            None => &EMPTY_IMAGE[..],
+            None => EMPTY_IMAGE,
         }
     }
 }
@@ -355,7 +355,7 @@ impl From<PlayerState> for ConnectPlayerState {
         };
         let source = context.and_then(|PlayerContext { type_, uri }| match type_.as_str() {
             "album" => {
-                let id = uri.split(':').last().unwrap_or_default();
+                let id = uri.split(':').next_back().unwrap_or_default();
                 Some(SongsSource::Album(id.to_string()))
             }
             _ => None,
